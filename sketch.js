@@ -1,43 +1,30 @@
-var canvas, backgroundImage;
+var spaceship , background , laser;
+var spaceshipImg , backgroundImg , laserImg;
+var explosionSound , laserSound;
+var canvas;
 
-var gameState = 0;
-var playerCount;
-var allPlayers;
-var distance = 0;
-var database;
-
-var form, player, game;
-
-var cars, car1, car2, car3, car4;
-var track, car1_img, car2_img, car3_img, car4_img;
 
 function preload(){
-  track = loadImage("../images/track.jpg");
-  car1_img = loadImage("../images/car1.png");
-  car2_img = loadImage("../images/car2.png");
-  car3_img = loadImage("../images/car3.png");
-  car4_img = loadImage("../images/car4.png");
-  ground = loadImage("../images/ground.png");
+  background = loadImage("background.png");
+  spaceship = loadImage("spaceship.png");
+  laser = loadImage("laser.png");
+  explosionSound = loadSound("explosion.mp3");
+  laserSound = loadSound("laser.mp3");
 }
 
 function setup(){
-  canvas = createCanvas(displayWidth , displayHeight);
-  database = firebase.database();
-  game = new Game();
-  game.getState();
-  game.start();
+    canvas = createCanvas(displayWidth , displayHeight);
+  space = createSprite(250,350,30,20);
+  space.addImage(spaceImage);
+  space.velocityY = (5 + score/10);
+
+  spaceShip = createSprite(250,600);
+  spaceShip.addImage(spaceShipImage);
+  spaceShip.scale = 0.6;
+
 }
 
-
 function draw(){
-  if(playerCount === 4){
-    game.update(1);
-  }
-  if(gameState === 1){
-    clear();
-    game.play();
-  }
-  if(gameState === 2){
-    game.end();
-  }
+    
+drawSprites()
 }
